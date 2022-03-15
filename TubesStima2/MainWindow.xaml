@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TubesStima2"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="750">
+        Title="MainWindow" Height="550" Width="750" MinHeight="550" MinWidth="750">
     
     <Border Padding="20 10">
         <StackPanel>
@@ -58,10 +58,9 @@
                     <!-- Right Side: Graph -->
                     <StackPanel Grid.Column="1">
                         <TextBlock Text="Search Tree" Margin="30 10"/>
-                        <Image x:Name="SearchTreeImage" Margin="30 20" Stretch="Fill"
-                               RenderOptions.BitmapScalingMode="Fant"/>
+                        <Image x:Name="SearchTreeImage" Margin="30 20"
+                               RenderOptions.BitmapScalingMode="Fant" MaxHeight="300"/>
                     </StackPanel>
-                    
                 </Grid>
                 
                 

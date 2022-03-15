@@ -1,6 +1,7 @@
-﻿using System;
+﻿using System.Diagnostics;
 using System.Windows;
 using Microsoft.WindowsAPICodePack.Dialogs;
+using Color = Microsoft.Msagl.Drawing.Color;
 
 namespace TubesStima2 {
     /// <summary>
@@ -24,7 +25,8 @@ namespace TubesStima2 {
                 MessageBox.Show("Please choose the starting directory.", "Incomplete settings");
                 return;
             }
-            
+
+            FileNameTextBox.Text = FileNameTextBox.Text.Trim();
             if (FileNameTextBox.Text == "") {
                 MessageBox.Show("Please fill in the file name to be searched up.", 
                     "Incomplete settings");
@@ -36,8 +38,22 @@ namespace TubesStima2 {
                 MessageBox.Show("Please choose the search method.", "Incomplete settings");
                 return;
             }
-
             
+            // Example of DrawingTree
+
+            DrawingTree t = new DrawingTree("root", Color.Black);
+            string id1 = t.AddChild("a", Color.Aqua);
+            t.AddChild(id1, "b", Color.Chocolate);
+            t.AddChild(id1, "c", Color.Blue);
+            string id2 = t.AddChild("α", Color.Indigo);
+            t.AddChild(id2, "β", Color.Olive);
+
+            DrawingTree t1 = new DrawingTree("γ", Color.Teal);
+            t1.AddChild("δ", Color.IndianRed);
+            t.AddChild(id2, t1, Color.Violet);
+            SearchTreeImage.Source = t.Display();
+
+
             if (BfsButton.IsChecked == true) {
                 // BFS(StartingDirectoryTextBlock.Text, FindAllCheck.IsChecked)
             }
