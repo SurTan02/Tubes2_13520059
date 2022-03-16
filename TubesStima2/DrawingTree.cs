@@ -2,6 +2,7 @@
 using System;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Linq;
 using System.Windows.Media.Imaging;
 using Microsoft.Msagl.Drawing;
 using Microsoft.Msagl.GraphViewerGdi;
@@ -9,19 +10,10 @@ using Color = Microsoft.Msagl.Drawing.Color;
 
 namespace TubesStima2 {
     public class DrawingTree {
-        public enum DrawingTreeColor {
-            Black, Red, Blue
-        }
-
         private Graph graph;
         private string rootId;
         private static int nodeCount = 0;
 
-        public string RootId
-        {
-            get { return rootId; }
-        }
-        
         public DrawingTree() {
             graph = new Graph();
         }
@@ -40,8 +32,8 @@ namespace TubesStima2 {
             return AddChild(rootId, childname, color);
         }
 
-        public void AddChild(DrawingTree child, Color color) {
-            AddChild(rootId, child, color);
+        public void AddChild(DrawingTree child) {
+            AddChild(rootId, child);
         }
 
         public string AddChild(string parentid, string childname, Color color) {
@@ -53,14 +45,17 @@ namespace TubesStima2 {
             child.LabelText = childname;
             child.Label.FontColor = color;
             graph.AddNode(child); 
+            
             Edge e = graph.AddEdge(parentid, child.Id);
             e.Attr.ArrowheadAtTarget = ArrowStyle.Normal;
-            e.Attr.Color = color;
+
+            UpdateColor(child.Id);
+            
             nodeCount += 1;
             return child.Id;
         }
 
-        public void AddChild(string parentid, DrawingTree child, Color color) {
+        public void AddChild(string parentid, DrawingTree child) {
             if (graph.FindNode(parentid) == null) {
                 throw new Exception("Parent ID not found.");
             }
@@ -71,7 +66,28 @@ namespace TubesStima2 {
 
             Edge e = graph.AddEdge(parentid, child.rootId);
             e.Attr.ArrowheadAtTarget = ArrowStyle.Normal;
-            e.Attr.Color = color;
+            
+            UpdateColor(child.rootId);
+        }
+
+        public void UpdateColor(string id) {
+            Node node = graph.FindNode(id);
+            Color color = node.Label.FontColor;
+            Edge edge;
+            
+            if (color == Color.Black)
+                return;
+            
+            while (node.InEdges.Any()) {
+                edge = node.InEdges.First();
+                node = graph.FindNode(edge.Source);
+                edge.Attr.Color = color;
+                if (node.Label.FontColor == Color.Blue) {
+                    break;
+                }
+                node.Label.FontColor = color;
+            }
+            
         }
 
         public BitmapImage Display() {

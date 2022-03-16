@@ -42,15 +42,15 @@ namespace TubesStima2 {
             // Example of DrawingTree
 
             DrawingTree t = new DrawingTree("root", Color.Black);
-            string id1 = t.AddChild("a", Color.Aqua);
-            t.AddChild(id1, "b", Color.Chocolate);
+            string id1 = t.AddChild("a", Color.Black);
+            t.AddChild(id1, "b", Color.Red);
             t.AddChild(id1, "c", Color.Blue);
-            string id2 = t.AddChild("α", Color.Indigo);
-            t.AddChild(id2, "β", Color.Olive);
+            string id2 = t.AddChild("α", Color.Black);
+            t.AddChild(id2, "β", Color.Red);
 
-            DrawingTree t1 = new DrawingTree("γ", Color.Teal);
-            t1.AddChild("δ", Color.IndianRed);
-            t.AddChild(id2, t1, Color.Violet);
+            DrawingTree t1 = new DrawingTree("γ", Color.Black);
+            t1.AddChild("δ", Color.Red);
+            t.AddChild(id2, t1);
             SearchTreeImage.Source = t.Display();
 
 
