@@ -3,6 +3,8 @@ using System.Windows;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using Color = Microsoft.Msagl.Drawing.Color;
 
+
+
 namespace TubesStima2 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -38,20 +40,9 @@ namespace TubesStima2 {
                 MessageBox.Show("Please choose the search method.", "Incomplete settings");
                 return;
             }
+            DrawingTree t = new DrawingTree(StartingDirectoryTextBlock.Text, Color.Black);
+
             
-            // Example of DrawingTree
-
-            DrawingTree t = new DrawingTree("root", Color.Black);
-            string id1 = t.AddChild("a", Color.Black);
-            t.AddChild(id1, "b", Color.Red);
-            t.AddChild(id1, "c", Color.Blue);
-            string id2 = t.AddChild("α", Color.Black);
-            t.AddChild(id2, "β", Color.Red);
-
-            DrawingTree t1 = new DrawingTree("γ", Color.Black);
-            t1.AddChild("δ", Color.Red);
-            t.AddChild(id2, t1);
-            SearchTreeImage.Source = t.Display();
 
 
             if (BfsButton.IsChecked == true) {
@@ -59,8 +50,21 @@ namespace TubesStima2 {
             }
 
             else {
-                // DFS(StartingDirectoryTextBlock.Text, FindAllCheck.IsChecked)
+                DepthFirstSearch DFSX = new DepthFirstSearch();
+               
+                DFSX.DFS(StartingDirectoryTextBlock.Text , FileNameTextBox.Text, FindAllCheck.IsChecked== true, t,false);
+                //Cuma untuk debug dapatin path
+                if (DFSX.Solution.Count == 0){
+                    MessageBox.Show("Tidak Ada File yang Cocok");
+                }
+                foreach(string solution in DFSX.Solution){
+                    MessageBox.Show (solution);
+                }
             }
+            SearchTreeImage.Source = t.Display();
+            
         }
     }
+
+   
 }
