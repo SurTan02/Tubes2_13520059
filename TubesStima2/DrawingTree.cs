@@ -13,7 +13,11 @@ namespace TubesStima2 {
         {
             get { return graph; }
         }
-        
+      
+        public string getID{
+            get { return rootId; }
+        }
+
         public DrawingTree() {
             graph = new Graph();
         }
@@ -90,6 +94,14 @@ namespace TubesStima2 {
             
         }
 
-    }
+        public void UpdateEmptyFolderColor(string id) {
+            Node node = graph.FindNode(id);
+            node.Label.FontColor = Color.Red;
+            }
+            
+        }
+        
+        
+    
     
 }

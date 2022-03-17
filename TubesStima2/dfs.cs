@@ -2,6 +2,7 @@ using System.IO;
 using System.Collections.Generic;
 using System;
 using Color = Microsoft.Msagl.Drawing.Color;
+using MessageBox = System.Windows.MessageBox;
 
 namespace TubesStima2
 {
@@ -15,6 +16,10 @@ namespace TubesStima2
         {
             string[] files = null;
             string[] subDirs = null;
+            if (Directory.GetFiles(root).Length == 0){
+                t.UpdateEmptyFolderColor(t.getID);
+                return FOUND;
+            }
             // First, process all the files directly under this folder
             try 
             {
@@ -22,6 +27,7 @@ namespace TubesStima2
             }
             catch (System.IO.DirectoryNotFoundException e)
             {
+                
                 Console.WriteLine(e.Message);
             }
             
@@ -44,7 +50,7 @@ namespace TubesStima2
                 }
                 try 
                 {
-                     subDirs = System.IO.Directory.GetDirectories(root);
+                    subDirs = System.IO.Directory.GetDirectories(root);
                 }
                 catch (System.IO.DirectoryNotFoundException e)
                 {
@@ -59,7 +65,8 @@ namespace TubesStima2
                     if(!FOUND || allOccurance){
                        FOUND =  DFS(dirInfo,searchValue,allOccurance,t1,FOUND);
                     }
-                    t.AddChild(t1);
+                    // if (Directory.GetFiles(dirInfo).Length > 0)
+                     t.AddChild(t1);
                 }
                 
             }
