@@ -16,14 +16,14 @@ namespace TubesStima2
         {
             string[] files = null;
             string[] subDirs = null;
-            if (Directory.GetFiles(root).Length == 0){
-                t.UpdateEmptyFolderColor(t.getID);
-                return FOUND;
-            }
+           
             // First, process all the files directly under this folder
             try 
             {
                 files = System.IO.Directory.GetFiles(root);
+                if (files.Length == 0){
+                    t.UpdateEmptyFolderColor(t.getID);
+                }
             }
             catch (System.IO.DirectoryNotFoundException e)
             {
@@ -66,7 +66,7 @@ namespace TubesStima2
                        FOUND =  DFS(dirInfo,searchValue,allOccurance,t1,FOUND);
                     }
                     // if (Directory.GetFiles(dirInfo).Length > 0)
-                     t.AddChild(t1);
+                    t.AddChild(t1);
                 }
                 
             }
