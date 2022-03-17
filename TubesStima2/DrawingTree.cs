@@ -1,11 +1,6 @@
-﻿using System.Windows.Markup;
-using System;
-using System.Drawing;
-using System.Drawing.Imaging;
+﻿using System;
 using System.Linq;
-using System.Windows.Media.Imaging;
 using Microsoft.Msagl.Drawing;
-using Microsoft.Msagl.GraphViewerGdi;
 using Color = Microsoft.Msagl.Drawing.Color;
 
 namespace TubesStima2 {
@@ -14,6 +9,11 @@ namespace TubesStima2 {
         private string rootId;
         private static int nodeCount = 0;
 
+        public Graph Graph
+        {
+            get { return graph; }
+        }
+        
         public DrawingTree() {
             graph = new Graph();
         }
@@ -70,7 +70,7 @@ namespace TubesStima2 {
             UpdateColor(child.rootId);
         }
 
-        public void UpdateColor(string id) {
+        private void UpdateColor(string id) {
             Node node = graph.FindNode(id);
             Color color = node.Label.FontColor;
             Edge edge;
@@ -82,38 +82,12 @@ namespace TubesStima2 {
                 edge = node.InEdges.First();
                 node = graph.FindNode(edge.Source);
                 edge.Attr.Color = color;
-                if (node.Label.FontColor == Color.Blue) {
+                if (node.Label.FontColor == Color.Green) {
                     break;
                 }
                 node.Label.FontColor = color;
             }
             
-        }
-
-        public BitmapImage Display() {
-            GraphRenderer renderer = new GraphRenderer (graph);
-            renderer.CalculateLayout();
-            int width = 500;
-            Bitmap bitmap = new Bitmap(width, (int)(graph.Height * (width / graph.Width)), 
-                PixelFormat.Format32bppPArgb); 
-            renderer.Render(bitmap);
-            return Bmp2BmpImg(bitmap);
-        }
-        
-        private static BitmapImage Bmp2BmpImg(Bitmap bmp) {
-            using (var memory = new System.IO.MemoryStream()) {
-                bmp.Save(memory, ImageFormat.Png);
-                memory.Position = 0;
-
-                var bitmapImage = new BitmapImage();
-                bitmapImage.BeginInit();
-                bitmapImage.StreamSource = memory;
-                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-                bitmapImage.EndInit();
-                bitmapImage.Freeze();
-
-                return bitmapImage;
-            }
         }
 
     }

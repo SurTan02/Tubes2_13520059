@@ -1,9 +1,7 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.Generic;
 using System.Windows;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using Color = Microsoft.Msagl.Drawing.Color;
-
-
 
 namespace TubesStima2 {
     /// <summary>
@@ -40,10 +38,9 @@ namespace TubesStima2 {
                 MessageBox.Show("Please choose the search method.", "Incomplete settings");
                 return;
             }
-            DrawingTree t = new DrawingTree(StartingDirectoryTextBlock.Text, Color.Black);
-
             
-
+            DrawingTree t = new DrawingTree(StartingDirectoryTextBlock.Text, Color.Black);
+            List<string> filepaths = null;
 
             if (BfsButton.IsChecked == true) {
                 // BFS(StartingDirectoryTextBlock.Text, FindAllCheck.IsChecked)
@@ -51,20 +48,25 @@ namespace TubesStima2 {
 
             else {
                 DepthFirstSearch DFSX = new DepthFirstSearch();
-               
-                DFSX.DFS(StartingDirectoryTextBlock.Text , FileNameTextBox.Text, FindAllCheck.IsChecked== true, t,false);
-                //Cuma untuk debug dapatin path
-                if (DFSX.Solution.Count == 0){
-                    MessageBox.Show("Tidak Ada File yang Cocok");
-                }
-                foreach(string solution in DFSX.Solution){
-                    MessageBox.Show (solution);
-                }
+                DFSX.DFS(StartingDirectoryTextBlock.Text, FileNameTextBox.Text, FindAllCheck.IsChecked == true, t,
+                    false);
+                filepaths = DFSX.Solution;
             }
-            SearchTreeImage.Source = t.Display();
+            
+            if (filepaths.Count == 0){
+                MessageBox.Show("No matching files found.", "Result");
+            }
+
+            int counter = 1;
+            foreach (string solution in filepaths) {
+                FilepathTextBlock.Text += $"{counter}. {solution}\n";
+                counter += 1;
+            }
+            
+            SearchTreeImage.Graph = t.Graph;
             
         }
+        
     }
-
-   
+    
 }

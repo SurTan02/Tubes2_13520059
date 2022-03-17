@@ -1,11 +1,11 @@
 ﻿<Window x:Class="TubesStima2.MainWindow"
+        xmlns:gv="clr-namespace:Microsoft.Msagl.WpfGraphControl;assembly=Microsoft.Msagl.WpfGraphControl"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:TubesStima2"
         mc:Ignorable="d"
-        Title="MainWindow" Height="550" Width="750" MinHeight="550" MinWidth="750">
+        Title="filesearch.exe" Height="650" Width="1000" ResizeMode="NoResize">
     
     <Border Padding="20 10">
         <StackPanel>
@@ -30,6 +30,8 @@
                     
                     <!-- Left Side: Settings -->
                     <StackPanel Grid.Column="0">
+                        <TextBlock Text="Settings" FontSize="14" FontWeight="Bold" TextDecorations="Underline" 
+                                   HorizontalAlignment="Center" Margin="30 10 30 40"/>
                         <TextBlock Text="Choose Directory"/>
                         <Button x:Name="StartingDirectoryButton" Click="StartingDirectoryButton_OnClick" 
                                 Content="Choose" Margin="0 7 0 3" Width="100" 
@@ -57,13 +59,13 @@
                     
                     <!-- Right Side: Graph -->
                     <StackPanel Grid.Column="1">
-                        <TextBlock Text="Search Tree" Margin="30 10"/>
-                        <Image x:Name="SearchTreeImage" Margin="30 20"
-                               RenderOptions.BitmapScalingMode="Fant" MaxHeight="300"/>
+                        <TextBlock Text="Search Tree" FontSize="14" FontWeight="Bold" TextDecorations="Underline" 
+                                   HorizontalAlignment="Center" Margin="30 10"/>
+                        <gv:AutomaticGraphLayoutControl x:Name="SearchTreeImage" Margin="30 20"
+                                                        RenderOptions.BitmapScalingMode="Fant" Height="350"/>
+                        <TextBlock x:Name="FilepathTextBlock" Margin="30 10" TextWrapping="Wrap"/>
                     </StackPanel>
                 </Grid>
-                
-                
             </Grid>
             
         </StackPanel>
