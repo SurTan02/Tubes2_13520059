@@ -5,8 +5,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="filesearch.exe" Height="650" Width="1000" ResizeMode="NoResize">
-    
+        Title="filesearch.exe" Height="675" Width="1000" ResizeMode="NoResize">
+    <ScrollViewer>
     <Border Padding="20 10">
         <StackPanel>
             <Grid>
@@ -58,16 +58,16 @@
                     </StackPanel>
                     
                     <!-- Right Side: Graph -->
-                    <StackPanel Grid.Column="1">
+                    <StackPanel x:Name="OutputStackPanel" Grid.Column="1">
                         <TextBlock Text="Search Tree" FontSize="14" FontWeight="Bold" TextDecorations="Underline" 
                                    HorizontalAlignment="Center" Margin="30 10"/>
-                        <gv:AutomaticGraphLayoutControl x:Name="SearchTreeImage" Margin="30 20"
+                        <gv:AutomaticGraphLayoutControl x:Name="SearchTreeImage" Margin="30 20 30 20"
                                                         RenderOptions.BitmapScalingMode="Fant" Height="350"/>
-                        <TextBlock x:Name="FilepathTextBlock" Margin="30 10" TextWrapping="Wrap"/>
                     </StackPanel>
                 </Grid>
             </Grid>
             
         </StackPanel>
     </Border>
+    </ScrollViewer>
 </Window>
