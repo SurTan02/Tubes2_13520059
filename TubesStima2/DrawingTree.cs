@@ -90,7 +90,7 @@ namespace TubesStima2 {
                 edge = node.InEdges.First();
                 node = graph.FindNode(edge.Source);
                 edge.Attr.Color = color;
-                if (edge.Source == "0" || node.Label.FontColor == Color.Green) {
+                if (node.Label.FontColor == Color.Green) {
                     break;
                 }
                 node.Label.FontColor = color;

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System;
 using Color = Microsoft.Msagl.Drawing.Color;
+using Node = Microsoft.Msagl.Drawing.Node;
+using Edge = Microsoft.Msagl.Drawing.Edge;
 
 namespace TubesStima2
 {
@@ -18,26 +20,31 @@ namespace TubesStima2
             return path.Split(pathSeparators, StringSplitOptions.RemoveEmptyEntries);
         }
 
-        public Boolean BFS(string root, string searchValue, bool allOccurence, DrawingTree t, Boolean FOUND)
+        public Boolean BFS(string root, string searchValue, bool allOccurence, DrawingTree t)
         {
+            Boolean FOUND = false;
             Queue<string> dirs = new Queue<string>();
-            Queue<DrawingTree> dirtree = new Queue<DrawingTree>();
+            Queue<Node> nodes = new Queue<Node>();
+            // Queue<DrawingTree> dirNode = new Queue<DrawingTree>();
             dirs.Enqueue(root);
-            dirtree.Enqueue(t);
+            nodes.Enqueue(t.Graph.FindNode(t.getID));
+            // dirNode.Enqueue(t);
             string[] files = null;
             string[] subDirs = null;
 
-            while (dirs.Count > 0 && dirtree.Count > 0 && (!FOUND || allOccurence))
+            while (dirs.Count > 0 && nodes.Count > 0 && (!FOUND || allOccurence))
             {
                 string current = dirs.Dequeue();
-                DrawingTree currentTree = dirtree.Dequeue();
+                // DrawingTree currentTree = dirNode.Dequeue();
+                Node currentNode = nodes.Dequeue();
                 // process all files directly under this folder
                 try
                 {
                     files = System.IO.Directory.GetFiles(current);
                     if (files.Length == 0)
                     {
-                        currentTree.UpdateEmptyFolderColor(currentTree.getID);
+                        // currentTree.UpdateEmptyFolderColor(currentTree.getID);
+                        currentNode.Label.FontColor = Color.Red;
                     }
                 }
                 catch (System.IO.DirectoryNotFoundException e)
@@ -54,7 +61,8 @@ namespace TubesStima2
                         {
                             Solution.Add(fi);
                             string LastName = SplitPath(fi)[SplitPath(fi).Length - 1];
-                            currentTree.AddChild(LastName, Color.Green);
+                            // currentTree.AddChild(LastName, Color.Green);
+                            t.AddChild(currentNode.Id, LastName, Color.Green);
                             FOUND = true;
 
                             // Jika all Occurence tidak di cek
@@ -62,7 +70,8 @@ namespace TubesStima2
                         }
                         else
                         {
-                            currentTree.AddChild(Path.GetFileName(fi), Color.Red);
+                            // currentTree.AddChild(Path.GetFileName(fi), Color.Red);
+                            t.AddChild(currentNode.Id, Path.GetFileName(fi), Color.Red);
                         }
                     }
                     try
@@ -79,9 +88,11 @@ namespace TubesStima2
                         // this.QUEUE.Push(dirInfo)
                         dirs.Enqueue(dirInfo);
                         string LastName = SplitPath(dirInfo)[SplitPath(dirInfo).Length - 1];
-                        DrawingTree t1 = new DrawingTree(LastName, Color.Black);
-                        currentTree.AddChild(t1);
-                        dirtree.Enqueue(t1);
+                        // DrawingTree t1 = new DrawingTree(LastName, Color.Black);
+                        // currentTree.AddChild(t1);
+                        string childId = t.AddChild(currentNode.Id, LastName, Color.Black);
+                        // dirNode.Enqueue(t1);
+                        nodes.Enqueue(t.Graph.FindNode(childId));
                     }
                 }
             }

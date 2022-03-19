@@ -24,3 +24,29 @@ C:\Users\ASUS\Documents\Wesly G\ITB\Akademik\IF2211 Strategi Algoritma\Tugas Bes
 C:\Users\ASUS\Documents\Wesly G\ITB\Akademik\IF2211 Strategi Algoritma\Tugas Besar 2\Tubes_Stima_2\TubesStima2\bin\Debug\AutomaticGraphLayout.dll
 C:\Users\ASUS\Documents\Wesly G\ITB\Akademik\IF2211 Strategi Algoritma\Tugas Besar 2\Tubes_Stima_2\TubesStima2\bin\Debug\AutomaticGraphLayout.Drawing.dll
 C:\Users\ASUS\Documents\Wesly G\ITB\Akademik\IF2211 Strategi Algoritma\Tugas Besar 2\Tubes_Stima_2\TubesStima2\bin\Debug\Microsoft.Msagl.WpfGraphControl.dll
+D:\repos\Tubes_Stima_2\TubesStima2\bin\Debug\TubesStima2.exe.config
+D:\repos\Tubes_Stima_2\TubesStima2\bin\Debug\TubesStima2.exe
+D:\repos\Tubes_Stima_2\TubesStima2\bin\Debug\TubesStima2.pdb
+D:\repos\Tubes_Stima_2\TubesStima2\bin\Debug\AutomaticGraphLayout.dll
+D:\repos\Tubes_Stima_2\TubesStima2\bin\Debug\AutomaticGraphLayout.Drawing.dll
+D:\repos\Tubes_Stima_2\TubesStima2\bin\Debug\Microsoft.Msagl.dll
+D:\repos\Tubes_Stima_2\TubesStima2\bin\Debug\Microsoft.Msagl.WpfGraphControl.dll
+D:\repos\Tubes_Stima_2\TubesStima2\bin\Debug\Microsoft.WindowsAPICodePack.dll
+D:\repos\Tubes_Stima_2\TubesStima2\bin\Debug\Microsoft.WindowsAPICodePack.Shell.dll
+D:\repos\Tubes_Stima_2\TubesStima2\bin\Debug\Microsoft.WindowsAPICodePack.ShellExtensions.dll
+D:\repos\Tubes_Stima_2\TubesStima2\bin\Debug\Microsoft.Msagl.xml
+D:\repos\Tubes_Stima_2\TubesStima2\bin\Debug\Microsoft.WindowsAPICodePack.xml
+D:\repos\Tubes_Stima_2\TubesStima2\bin\Debug\Microsoft.WindowsAPICodePack.Shell.xml
+D:\repos\Tubes_Stima_2\TubesStima2\bin\Debug\Microsoft.WindowsAPICodePack.ShellExtensions.xml
+D:\repos\Tubes_Stima_2\TubesStima2\obj\Debug\TubesStima2.csproj.AssemblyReference.cache
+D:\repos\Tubes_Stima_2\TubesStima2\obj\Debug\MainWindow.baml
+D:\repos\Tubes_Stima_2\TubesStima2\obj\Debug\MainWindow.g.cs
+D:\repos\Tubes_Stima_2\TubesStima2\obj\Debug\App.g.cs
+D:\repos\Tubes_Stima_2\TubesStima2\obj\Debug\TubesStima2_MarkupCompile.cache
+D:\repos\Tubes_Stima_2\TubesStima2\obj\Debug\TubesStima2.g.resources
+D:\repos\Tubes_Stima_2\TubesStima2\obj\Debug\TubesStima2.Properties.Resources.resources
+D:\repos\Tubes_Stima_2\TubesStima2\obj\Debug\TubesStima2.csproj.GenerateResource.cache
+D:\repos\Tubes_Stima_2\TubesStima2\obj\Debug\TubesStima2.csproj.CoreCompileInputs.cache
+D:\repos\Tubes_Stima_2\TubesStima2\obj\Debug\TubesStima2.csproj.CopyComplete
+D:\repos\Tubes_Stima_2\TubesStima2\obj\Debug\TubesStima2.exe
+D:\repos\Tubes_Stima_2\TubesStima2\obj\Debug\TubesStima2.pdb

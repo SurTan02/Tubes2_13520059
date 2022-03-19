@@ -48,6 +48,9 @@ namespace TubesStima2 {
 
             if (BfsButton.IsChecked == true) {
                 // BFS(StartingDirectoryTextBlock.Text, FindAllCheck.IsChecked)
+                BreadthFirstSearch BFSX = new BreadthFirstSearch();
+                BFSX.BFS(StartingDirectoryTextBlock.Text, FileNameTextBox.Text, FindAllCheck.IsChecked == true, t);
+                filepaths = BFSX.Solution;
             }
 
             else {
