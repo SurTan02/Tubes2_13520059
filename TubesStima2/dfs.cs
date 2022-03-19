@@ -40,7 +40,7 @@ namespace TubesStima2
                         string LastName = SplitPath(fi)[SplitPath(fi).Length-1];
                         t.AddChild(LastName, Color.Green);
                         FOUND = true;
-
+                        
                         //Jika all Occurance tidak di cek
                         if (!allOccurance)   break;
                     }

@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.Remoting.Channels;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
-using System.Windows.Navigation;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using Color = Microsoft.Msagl.Drawing.Color;
+using System.Windows.Media;
 
 namespace TubesStima2 {
     /// <summary>
@@ -60,6 +59,7 @@ namespace TubesStima2 {
             
             if (filepaths.Count == 0){
                 MessageBox.Show("No matching files found.", "Result");
+                // filepaths.Add("No matching files found.");
             }
             
             int counter = 0;
@@ -70,20 +70,26 @@ namespace TubesStima2 {
                 tb.Text = $"{counter}.  ";
                 Run r = new Run();
                 r.Text = solution;
+                
                 Hyperlink h = new Hyperlink();
                 h.Inlines.Add(r);
+                
                 h.NavigateUri = new Uri(solution.Remove(solution.LastIndexOf("\\")));
                 h.RequestNavigate += (sender1, e1) =>
                     System.Diagnostics.Process.Start(e1.Uri.ToString());
                 tb.Inlines.Add(h);
                 tb.TextWrapping = TextWrapping.Wrap;
                 tb.Margin = new Thickness(30,3,30,3);
+                
+                
+                tb.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("AliceBlue");;
                 OutputStackPanel.Children.Add(tb);
             }
 
             SearchTreeImage.Graph = t.Graph;
             
         }
+
         
     }
 
