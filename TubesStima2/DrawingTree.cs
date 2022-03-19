@@ -2,6 +2,7 @@
 using System.Linq;
 using Microsoft.Msagl.Drawing;
 using Color = Microsoft.Msagl.Drawing.Color;
+using System.Windows.Media;
 
 namespace TubesStima2 {
     public class DrawingTree {
@@ -24,6 +25,8 @@ namespace TubesStima2 {
 
         public DrawingTree(string name, Color color) {
             graph = new Graph();
+
+            
             Node root = new Node(nodeCount.ToString());
             root.LabelText = name;
             root.Label.FontColor = color;
@@ -38,6 +41,7 @@ namespace TubesStima2 {
 
         public void AddChild(DrawingTree child) {
             AddChild(rootId, child);
+            
         }
 
         public string AddChild(string parentid, string childname, Color color) {
@@ -79,7 +83,7 @@ namespace TubesStima2 {
             Color color = node.Label.FontColor;
             Edge edge;
             
-            if (color == Color.Black)
+            if (color == Color.Yellow)
                 return;
             
             while (node.InEdges.Any()) {
