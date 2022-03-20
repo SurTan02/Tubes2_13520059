@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System;
 using Color = Microsoft.Msagl.Drawing.Color;
 using Node = Microsoft.Msagl.Drawing.Node;
-using Edge = Microsoft.Msagl.Drawing.Edge;
 
 namespace TubesStima2
 {
@@ -56,7 +55,7 @@ namespace TubesStima2
                 {
                     foreach (string fi in files)
                     {
-                        Console.WriteLine(fi);
+                        
                         if (Path.GetFileName(fi) == searchValue)
                         {
                             Solution.Add(fi);

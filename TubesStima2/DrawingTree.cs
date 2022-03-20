@@ -2,7 +2,6 @@
 using System.Linq;
 using Microsoft.Msagl.Drawing;
 using Color = Microsoft.Msagl.Drawing.Color;
-using System.Windows.Media;
 
 namespace TubesStima2 {
     public class DrawingTree {

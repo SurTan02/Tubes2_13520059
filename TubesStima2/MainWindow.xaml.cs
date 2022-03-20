@@ -5,7 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using Color = Microsoft.Msagl.Drawing.Color;
-using System.Windows.Media;
+
 
 namespace TubesStima2 {
     /// <summary>
@@ -14,6 +14,7 @@ namespace TubesStima2 {
     public partial class MainWindow {
         public MainWindow() {
             InitializeComponent();
+            
         }
 
         private void StartingDirectoryButton_OnClick(object sender, RoutedEventArgs e) {
@@ -45,29 +46,41 @@ namespace TubesStima2 {
             
             DrawingTree t = new DrawingTree(StartingDirectoryTextBlock.Text, Color.Black);
             List<string> filepaths = null;
+            var watch = new System.Diagnostics.Stopwatch();
+            
+
 
             if (BfsButton.IsChecked == true) {
                 // BFS(StartingDirectoryTextBlock.Text, FindAllCheck.IsChecked)
                 BreadthFirstSearch BFSX = new BreadthFirstSearch();
+                watch.Start();
                 BFSX.BFS(StartingDirectoryTextBlock.Text, FileNameTextBox.Text, FindAllCheck.IsChecked == true, t);
                 filepaths = BFSX.Solution;
+                watch.Stop();
             }
 
             else {
                 DepthFirstSearch DFSX = new DepthFirstSearch();
-                DFSX.DFS(StartingDirectoryTextBlock.Text, FileNameTextBox.Text, FindAllCheck.IsChecked == true, t,
-                    false);
+                watch.Start();
+                DFSX.DFS(StartingDirectoryTextBlock.Text, FileNameTextBox.Text, FindAllCheck.IsChecked == true, t, false);
                 filepaths = DFSX.Solution;
+                watch.Stop();
             }
-            
+            OutputStackPanel.Children.RemoveRange(2, OutputStackPanel.Children.Count - 2);
             if (filepaths.Count == 0){
-                MessageBox.Show("No matching files found.", "Result");
-                // filepaths.Add("No matching files found.");
+                
+                TextBlock  tb = new TextBlock();
+                tb.Text = "No matching files found.";
+                tb.TextWrapping = TextWrapping.Wrap;
+                tb.Margin = new Thickness(30, 3, 30, 3);
+                OutputStackPanel.Children.Add(tb);
             }
             
             int counter = 0;
-            OutputStackPanel.Children.RemoveRange(2, OutputStackPanel.Children.Count - 2);
+            
             foreach (string solution in filepaths) {
+                
+
                 counter += 1;
                 TextBlock tb = new TextBlock();
                 tb.Text = $"{counter}.  ";
@@ -85,12 +98,13 @@ namespace TubesStima2 {
                 tb.Margin = new Thickness(30,3,30,3);
                 
                 
-                tb.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("AliceBlue");;
+                
                 OutputStackPanel.Children.Add(tb);
             }
 
             SearchTreeImage.Graph = t.Graph;
-            
+    
+            TimeElapsedTextBox.Text = $"Total Execution Time: {watch.ElapsedMilliseconds} ms";
         }
 
         

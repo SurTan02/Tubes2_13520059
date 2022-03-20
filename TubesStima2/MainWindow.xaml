@@ -5,7 +5,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="filesearch.exe" Height="675" Width="1092" ResizeMode="CanResize">
+        Title="filesearch.exe" Height="675" Width="1092" ResizeMode="NoResize">
     <ScrollViewer>
 
         <Border Padding="20 10" >
@@ -60,6 +60,9 @@
 
                             <Button x:Name="SearchButton" Click="SearchButton_OnClick" Margin="0 25 5 20"
 							HorizontalAlignment="Center" Content="Search" Width="100"    BorderBrush="#FF133190" Background="#FF7A98F7"/>
+                            <TextBlock x:Name="TimeElapsedTextBox" TextWrapping="Wrap"
+							   TextTrimming="CharacterEllipsis" Margin="0 0 5 10"
+							   MaxHeight="50" />
 
 
                         </StackPanel>

@@ -15,7 +15,7 @@ namespace TubesStima2
         {
             string[] files = null;
             string[] subDirs = null;
-           
+            string LastName;
             // Memeriksa file didalam folder "root"
             try 
             {
@@ -32,21 +32,30 @@ namespace TubesStima2
             }
             
             if (files != null)
-            {    
+            {   
+                int idx = 0; 
                 foreach (string fi in files)
                 {
-                    if (Path.GetFileName(fi) == searchValue){
+                    idx++;
+                    if (Path.GetFileName(fi) == searchValue ){
+                        
                         Solution.Add(fi);
-                        string LastName = SplitPath(fi)[SplitPath(fi).Length-1];
+                        LastName = SplitPath(fi)[SplitPath(fi).Length-1];
                         t.AddChild(LastName, Color.Green);
                         FOUND = true;
-                        
-                        //Jika all Occurance tidak di cek
-                        if (!allOccurance)   break;
+                         
+                        // Jika all Occurance tidak di cek
+                        if(!allOccurance){
+                            for (int i = idx; i<files.Length;i++){
+                                t.AddChild(Path.GetFileName(files[i]), Color.Black);
+                            }
+                            break;
+                        }
                     }
-                    else{
+                    else {
                         t.AddChild(Path.GetFileName(fi), Color.Red);
-                    }   
+                    }  
+                   
                 }
                 try 
                 {
@@ -60,7 +69,7 @@ namespace TubesStima2
                 foreach (string dirInfo in subDirs)
                 {
                     
-                    string LastName = SplitPath(dirInfo)[SplitPath(dirInfo).Length-1];
+                    LastName = SplitPath(dirInfo)[SplitPath(dirInfo).Length-1];
                     DrawingTree t1 = new DrawingTree(LastName, Color.Black);
                     // Jika Sudah ditemukan (Kasus non allOccurance)maka subfolder tidak akan dicek
                     if(!FOUND || allOccurance){
