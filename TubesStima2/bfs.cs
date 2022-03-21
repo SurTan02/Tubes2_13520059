@@ -23,81 +23,93 @@ namespace TubesStima2
         public Boolean BFS(string root, string searchValue, bool allOccurence, DrawingTree t)
         {
             Boolean FOUND = false;
-            Queue<string> dirs = new Queue<string>();
-            Queue<Node> nodes = new Queue<Node>();
+            Queue<string> dirQueue = new Queue<string>();
+            Queue<string> fileQueue = new Queue<string>();
+            Queue<(string, string)> nodeDrawQueue = new Queue<(string, string)>();
+            Queue<string> nodeFileQueue = new Queue<string>();
+            Queue<string> nodeDirQueue = new Queue<string>();
+            dirQueue.Enqueue(root);
+            nodeDirQueue.Enqueue(t.getID);
             // Queue<DrawingTree> dirNode = new Queue<DrawingTree>();
-            dirs.Enqueue(root);
-            nodes.Enqueue(t.Graph.FindNode(t.getID));
-            // dirNode.Enqueue(t);
             string[] files = null;
             string[] subDirs = null;
-
-            while (dirs.Count > 0 && nodes.Count > 0 && (!FOUND || allOccurence))
+            while (dirQueue.Count > 0 && (!FOUND || allOccurence))
             {
-                string current = dirs.Dequeue();
-                // DrawingTree currentTree = dirNode.Dequeue();
-                Node currentNode = nodes.Dequeue();
-                // process all files directly under this folder
-                try
+                while (dirQueue.Count > 0 && nodeDirQueue.Count > 0)
                 {
-                    files = System.IO.Directory.GetFiles(current);
-                    if (files.Length == 0)
-                    {
-                        // currentTree.UpdateEmptyFolderColor(currentTree.getID);
-                        currentNode.Label.FontColor = Color.Red;
-                    }
-                }
-                catch (System.IO.DirectoryNotFoundException e)
-                {
-                    Console.WriteLine(e.Message);
-                }
-                // main process
-                if (files != null)
-                {
-                    foreach (string fi in files)
-                    {
-                        Console.WriteLine(fi);
-                        if (Path.GetFileName(fi) == searchValue)
-                        {
-                            Solution.Add(fi);
-                            string LastName = SplitPath(fi)[SplitPath(fi).Length - 1];
-                            // currentTree.AddChild(LastName, Color.Green);
-                            t.AddChild(currentNode.Id, LastName, Color.Green);
-                            FOUND = true;
-
-                            // Jika all Occurence tidak di cek
-                            if (!allOccurence) break;
-                        }
-                        else
-                        {
-                            // currentTree.AddChild(Path.GetFileName(fi), Color.Red);
-                            t.AddChild(currentNode.Id, Path.GetFileName(fi), Color.Red);
-                        }
-                    }
+                    string currDir = dirQueue.Dequeue();
+                    string dirNodeId = nodeDirQueue.Dequeue();
+                    // Memeriksa file didalam folder "root"
                     try
                     {
-                        subDirs = System.IO.Directory.GetDirectories(current);
+                        files = System.IO.Directory.GetFiles(currDir);
+
+                        //Kasus jika folder kosong, update menjadi warna merah
+                        if (files.Length == 0)
+                        {
+                            t.UpdateEmptyFolderColor(dirNodeId);
+                        }
                     }
                     catch (System.IO.DirectoryNotFoundException e)
                     {
                         Console.WriteLine(e.Message);
                     }
-
-                    foreach (string dirInfo in subDirs)
+                    if (files != null)
                     {
-                        // this.QUEUE.Push(dirInfo)
-                        dirs.Enqueue(dirInfo);
-                        string LastName = SplitPath(dirInfo)[SplitPath(dirInfo).Length - 1];
-                        // DrawingTree t1 = new DrawingTree(LastName, Color.Black);
-                        // currentTree.AddChild(t1);
-                        string childId = t.AddChild(currentNode.Id, LastName, Color.Black);
-                        // dirNode.Enqueue(t1);
-                        nodes.Enqueue(t.Graph.FindNode(childId));
+                        foreach (string fi in files)
+                        {
+                            fileQueue.Enqueue(fi);
+                            string LastName = SplitPath(fi)[SplitPath(fi).Length - 1];
+                            string newNodeId = t.AddChild(dirNodeId, LastName, Color.Black);
+                            nodeFileQueue.Enqueue(newNodeId);
+                        }
+                        try
+                        {
+                            subDirs = System.IO.Directory.GetDirectories(currDir);
+                        }
+                        catch (System.IO.DirectoryNotFoundException e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
+                        foreach (string dir in subDirs)
+                        {
+                            dirQueue.Enqueue(dir);
+                            string LastName = SplitPath(dir)[SplitPath(dir).Length - 1];
+                            nodeDrawQueue.Enqueue((dirNodeId, LastName));
+                        }
+                    }
+                }
+
+                while (nodeDrawQueue.Count > 0)
+                {
+                    (string, string) nodeProps = nodeDrawQueue.Dequeue();
+                    string parentNodeId = nodeProps.Item1;
+                    string nodeLabel = nodeProps.Item2;
+                    string newNodeId = t.AddChild(parentNodeId, nodeLabel, Color.Black);
+                    nodeDirQueue.Enqueue(newNodeId);
+                }
+                
+                if (files != null)
+                {
+                    
+                    while (nodeFileQueue.Count > 0 && fileQueue.Count > 0)
+                    {
+                        string currNode = nodeFileQueue.Dequeue();
+                        string currFile = fileQueue.Dequeue();
+                        if (Path.GetFileName(currFile) == searchValue)
+                        {
+                            Solution.Add(currFile);
+                            t.SetToGreen(currNode);
+                            FOUND = true;
+                            if (!allOccurence) break;
+                        }
+                        else
+                        {
+                            t.SetToRed(currNode);
+                        }
                     }
                 }
             }
-
-
             return FOUND;
         }
     }

@@ -98,6 +98,54 @@ namespace TubesStima2 {
             
         }
 
+        public void SetToRed(string id)
+        {
+            Node node = graph.FindNode(id);
+            Color color = Color.Red;
+            node.Label.FontColor = color;
+            Edge edge;
+
+            if (color == Color.Yellow)
+                return;
+
+            while (node.InEdges.Any())
+            {
+                edge = node.InEdges.First();
+                node = graph.FindNode(edge.Source);
+                edge.Attr.Color = color;
+                if (node.Label.FontColor == Color.Red)
+                {
+                    break;
+                }
+                node.Label.FontColor = color;
+            }
+
+        }
+
+        public void SetToGreen(string id)
+        {
+            Node node = graph.FindNode(id);
+            Color color = Color.Green;
+            node.Label.FontColor = color;
+            Edge edge;
+
+            if (color == Color.Yellow)
+                return;
+
+            while (node.InEdges.Any())
+            {
+                edge = node.InEdges.First();
+                node = graph.FindNode(edge.Source);
+                edge.Attr.Color = color;
+                if (node.Label.FontColor == Color.Green)
+                {
+                    break;
+                }
+                node.Label.FontColor = color;
+            }
+
+        }
+
         public void UpdateEmptyFolderColor(string id) {
             Node node = graph.FindNode(id);
             node.Label.FontColor = Color.Red;
