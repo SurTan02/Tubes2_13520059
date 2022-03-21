@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System;
 using Color = Microsoft.Msagl.Drawing.Color;
 using Node = Microsoft.Msagl.Drawing.Node;
-using Edge = Microsoft.Msagl.Drawing.Edge;
 
 namespace TubesStima2
 {
@@ -35,30 +34,32 @@ namespace TubesStima2
             string[] subDirs = null;
             while (dirQueue.Count > 0 && (!FOUND || allOccurence))
             {
-                while (dirQueue.Count > 0 && nodeDirQueue.Count > 0)
+                string current = dirs.Dequeue();
+                // DrawingTree currentTree = dirNode.Dequeue();
+                Node currentNode = nodes.Dequeue();
+                // process all files directly under this folder
+                try
                 {
-                    string currDir = dirQueue.Dequeue();
-                    string dirNodeId = nodeDirQueue.Dequeue();
-                    // Memeriksa file didalam folder "root"
-                    try
+                    files = System.IO.Directory.GetFiles(current);
+                    if (files.Length == 0)
                     {
-                        files = System.IO.Directory.GetFiles(currDir);
-
-                        //Kasus jika folder kosong, update menjadi warna merah
-                        if (files.Length == 0)
-                        {
-                            t.UpdateEmptyFolderColor(dirNodeId);
-                        }
+                        // currentTree.UpdateEmptyFolderColor(currentTree.getID);
+                        currentNode.Label.FontColor = Color.Red;
                     }
-                    catch (System.IO.DirectoryNotFoundException e)
+                }
+                catch (System.IO.DirectoryNotFoundException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+                // main process
+                if (files != null)
+                {
+                    foreach (string fi in files)
                     {
-                        Console.WriteLine(e.Message);
-                    }
-                    if (files != null)
-                    {
-                        foreach (string fi in files)
+                        Console.WriteLine(fi);
+                        if (Path.GetFileName(fi) == searchValue)
                         {
-                            fileQueue.Enqueue(fi);
+                            Solution.Add(fi);
                             string LastName = SplitPath(fi)[SplitPath(fi).Length - 1];
                             string newNodeId = t.AddChild(dirNodeId, LastName, Color.Black);
                             nodeFileQueue.Enqueue(newNodeId);
