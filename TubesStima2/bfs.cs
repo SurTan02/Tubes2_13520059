@@ -30,7 +30,7 @@ namespace TubesStima2
             dirQueue.Enqueue(root);
             nodeDirQueue.Enqueue((t.getID, 0));
             // Queue<DrawingTree> dirNode = new Queue<DrawingTree>();
-            while (dirQueue.Count > 0 || (!FOUND || allOccurence))
+            while (dirQueue.Count > 0)
             {
                 string currentDir = dirQueue.Dequeue();
                 (string, int) currentNode = nodeDirQueue.Dequeue();
