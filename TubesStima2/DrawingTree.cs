@@ -43,7 +43,7 @@ namespace TubesStima2 {
             
         }
 
-        public string AddChild(string parentid, string childname, Color color) {
+        public string AddChild(string parentid, string childname, Color color, Boolean updateColor = true) {
             if (graph.FindNode(parentid) == null) {
                 throw new Exception("Parent ID not found.");
             }
@@ -56,7 +56,14 @@ namespace TubesStima2 {
             Edge e = graph.AddEdge(parentid, child.Id);
             e.Attr.ArrowheadAtTarget = ArrowStyle.Normal;
 
-            UpdateColor(child.Id);
+            if (updateColor)
+            {
+                UpdateColor(child.Id);
+            }
+            else
+            {
+                e.Attr.Color = color;
+            }
             
             nodeCount += 1;
             return child.Id;
@@ -145,9 +152,13 @@ namespace TubesStima2 {
 
         }
 
-        public void UpdateEmptyFolderColor(string id) {
+        public void UpdateEmptyFolderColor(string id, Boolean includeEdge = false) {
             Node node = graph.FindNode(id);
             node.Label.FontColor = Color.Red;
+            if (includeEdge && node.InEdges.Any()) {
+                Edge e = node.InEdges.First();
+                e.Attr.Color = Color.Red;
+                }
             }
             
         }
