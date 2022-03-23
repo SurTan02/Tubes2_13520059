@@ -42,10 +42,7 @@ namespace TubesStima2
                 {
                     maxLevel = currentLevel;
                 }
-                if (currentLevel <= maxLevel)
-                {
-                    t.UpdateEmptyFolderColor(currentNodeDir, true);
-                }
+                t.UpdateEmptyFolderColor(currentNodeDir, true);
                 
                 try
                 {
@@ -98,8 +95,7 @@ namespace TubesStima2
                         foreach (string dir in subDirs)
                         {
                             string dname = SplitPath(dir)[SplitPath(dir).Length - 1];
-                            t.AddChild(currentNodeDir, dname, Color.Black, updateColor: false);
-                            t.UpdateEmptyFolderColor(currentNodeDir, true);
+                            t.AddChild(currentNodeDir, dname, Color.Black, updateColor: false);      
                         }
                     }
                     else
