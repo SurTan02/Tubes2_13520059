@@ -6,15 +6,10 @@ using System.Windows.Documents;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using Color = Microsoft.Msagl.Drawing.Color;
 
-
 namespace TubesStima2 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow {
         public MainWindow() {
             InitializeComponent();
-            
         }
 
         private void StartingDirectoryButton_OnClick(object sender, RoutedEventArgs e) {
@@ -52,23 +47,25 @@ namespace TubesStima2 {
 
             if (BfsButton.IsChecked == true) {
                 // BFS(StartingDirectoryTextBlock.Text, FindAllCheck.IsChecked)
-                BreadthFirstSearch BFSX = new BreadthFirstSearch();
                 watch.Start();
+                BreadthFirstSearch BFSX = new BreadthFirstSearch();
                 BFSX.BFS(StartingDirectoryTextBlock.Text, FileNameTextBox.Text, FindAllCheck.IsChecked == true, t);
                 filepaths = BFSX.Solution;
                 watch.Stop();
             }
 
             else {
-                DepthFirstSearch DFSX = new DepthFirstSearch();
                 watch.Start();
+                DepthFirstSearch DFSX = new DepthFirstSearch();
                 DFSX.DFS(StartingDirectoryTextBlock.Text, FileNameTextBox.Text, FindAllCheck.IsChecked == true, t, false);
                 filepaths = DFSX.Solution;
                 watch.Stop();
             }
+            
+            // Refresh hyperlinks
             OutputStackPanel.Children.RemoveRange(2, OutputStackPanel.Children.Count - 2);
+            
             if (filepaths.Count == 0){
-                
                 TextBlock  tb = new TextBlock();
                 tb.Text = "No matching files found.";
                 tb.TextWrapping = TextWrapping.Wrap;
@@ -79,8 +76,6 @@ namespace TubesStima2 {
             int counter = 0;
             
             foreach (string solution in filepaths) {
-                
-
                 counter += 1;
                 TextBlock tb = new TextBlock();
                 tb.Text = $"{counter}.  ";
@@ -97,13 +92,10 @@ namespace TubesStima2 {
                 tb.TextWrapping = TextWrapping.Wrap;
                 tb.Margin = new Thickness(30,3,30,3);
                 
-                
-                
                 OutputStackPanel.Children.Add(tb);
             }
 
             SearchTreeImage.Graph = t.Graph;
-    
             TimeElapsedTextBox.Text = $"Total Execution Time: {watch.ElapsedMilliseconds} ms";
         }
 

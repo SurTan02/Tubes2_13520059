@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Windows.Forms;
 using Microsoft.Msagl.Drawing;
 using Color = Microsoft.Msagl.Drawing.Color;
 
@@ -14,7 +15,7 @@ namespace TubesStima2 {
             get { return graph; }
         }
       
-        public string getID{
+        public string RootId{
             get { return rootId; }
         }
 
@@ -24,8 +25,6 @@ namespace TubesStima2 {
 
         public DrawingTree(string name, Color color) {
             graph = new Graph();
-
-            
             Node root = new Node(nodeCount.ToString());
             root.LabelText = name;
             root.Label.FontColor = color;
@@ -40,10 +39,9 @@ namespace TubesStima2 {
 
         public void AddChild(DrawingTree child) {
             AddChild(rootId, child);
-            
         }
 
-        public string AddChild(string parentid, string childname, Color color, Boolean updateColor = true) {
+        public string AddChild(string parentid, string childname, Color color) {
             if (graph.FindNode(parentid) == null) {
                 throw new Exception("Parent ID not found.");
             }
@@ -55,16 +53,9 @@ namespace TubesStima2 {
             
             Edge e = graph.AddEdge(parentid, child.Id);
             e.Attr.ArrowheadAtTarget = ArrowStyle.Normal;
-
-            if (updateColor)
-            {
-                UpdateColor(child.Id);
-            }
-            else
-            {
-                e.Attr.Color = color;
-            }
             
+            UpdateColor(child.Id);
+
             nodeCount += 1;
             return child.Id;
         }
@@ -89,7 +80,7 @@ namespace TubesStima2 {
             Color color = node.Label.FontColor;
             Edge edge;
             
-            if (color == Color.Yellow)
+            if (color == Color.Black)
                 return;
             
             while (node.InEdges.Any()) {
@@ -101,69 +92,20 @@ namespace TubesStima2 {
                 }
                 node.Label.FontColor = color;
             }
-            
         }
 
-        public void SetToRed(string id)
-        {
+        public void SetColor(Color color) {
+            SetColor(rootId, color);
+        }
+
+        public void SetColor(string id, Color color) {
             Node node = graph.FindNode(id);
-            Color color = Color.Red;
             node.Label.FontColor = color;
-            Edge edge;
-
-            if (color == Color.Yellow)
-                return;
-
-            while (node.InEdges.Any())
-            {
-                edge = node.InEdges.First();
-                node = graph.FindNode(edge.Source);
-                edge.Attr.Color = color;
-                if (node.Label.FontColor == Color.Red)
-                {
-                    break;
-                }
-                node.Label.FontColor = color;
-            }
-
-        }
-
-        public void SetToGreen(string id)
-        {
-            Node node = graph.FindNode(id);
-            Color color = Color.Green;
-            node.Label.FontColor = color;
-            Edge edge;
-
-            if (color == Color.Yellow)
-                return;
-
-            while (node.InEdges.Any())
-            {
-                edge = node.InEdges.First();
-                node = graph.FindNode(edge.Source);
-                edge.Attr.Color = color;
-                if (node.Label.FontColor == Color.Green)
-                {
-                    break;
-                }
-                node.Label.FontColor = color;
-            }
-
-        }
-
-        public void UpdateEmptyFolderColor(string id, Boolean includeEdge = false) {
-            Node node = graph.FindNode(id);
-            node.Label.FontColor = Color.Red;
-            if (includeEdge && node.InEdges.Any()) {
+            if (node.InEdges.Any()) {
                 Edge e = node.InEdges.First();
-                e.Attr.Color = Color.Red;
-                }
+                e.Attr.Color = color;
             }
-            
         }
-        
-        
-    
-    
+    }
+
 }
