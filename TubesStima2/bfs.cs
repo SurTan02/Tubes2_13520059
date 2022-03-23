@@ -99,6 +99,7 @@ namespace TubesStima2
                         {
                             string dname = SplitPath(dir)[SplitPath(dir).Length - 1];
                             t.AddChild(currentNodeDir, dname, Color.Black, updateColor: false);
+                            t.UpdateEmptyFolderColor(currentNodeDir, true);
                         }
                     }
                     else
