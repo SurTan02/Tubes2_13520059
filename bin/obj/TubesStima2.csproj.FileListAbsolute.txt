@@ -1,0 +1,15 @@
+C:\Users\ASUS\Documents\Wesly G\ITB\Akademik\IF2211 Strategi Algoritma\Tugas Besar 2\Tubes_Stima_2\bin\obj\TubesStima2.csprojAssemblyReference.cache
+C:\Users\ASUS\Documents\Wesly G\ITB\Akademik\IF2211 Strategi Algoritma\Tugas Besar 2\Tubes_Stima_2\bin\obj\MainWindow.baml
+C:\Users\ASUS\Documents\Wesly G\ITB\Akademik\IF2211 Strategi Algoritma\Tugas Besar 2\Tubes_Stima_2\bin\obj\MainWindow.g.cs
+C:\Users\ASUS\Documents\Wesly G\ITB\Akademik\IF2211 Strategi Algoritma\Tugas Besar 2\Tubes_Stima_2\bin\obj\App.g.cs
+C:\Users\ASUS\Documents\Wesly G\ITB\Akademik\IF2211 Strategi Algoritma\Tugas Besar 2\Tubes_Stima_2\bin\obj\TubesStima2_MarkupCompile.cache
+C:\Users\ASUS\Documents\Wesly G\ITB\Akademik\IF2211 Strategi Algoritma\Tugas Besar 2\Tubes_Stima_2\bin\obj\TubesStima2.g.resources
+C:\Users\ASUS\Documents\Wesly G\ITB\Akademik\IF2211 Strategi Algoritma\Tugas Besar 2\Tubes_Stima_2\bin\obj\TubesStima2.Properties.Resources.resources
+C:\Users\ASUS\Documents\Wesly G\ITB\Akademik\IF2211 Strategi Algoritma\Tugas Besar 2\Tubes_Stima_2\bin\obj\TubesStima2.csproj.GenerateResource.cache
+C:\Users\ASUS\Documents\Wesly G\ITB\Akademik\IF2211 Strategi Algoritma\Tugas Besar 2\Tubes_Stima_2\bin\obj\TubesStima2.csproj.CoreCompileInputs.cache
+C:\Users\ASUS\Documents\Wesly G\ITB\Akademik\IF2211 Strategi Algoritma\Tugas Besar 2\Tubes_Stima_2\bin\obj\TubesStima2.csproj.CopyComplete
+C:\Users\ASUS\Documents\Wesly G\ITB\Akademik\IF2211 Strategi Algoritma\Tugas Besar 2\Tubes_Stima_2\bin\TubesStima2.exe.config
+C:\Users\ASUS\Documents\Wesly G\ITB\Akademik\IF2211 Strategi Algoritma\Tugas Besar 2\Tubes_Stima_2\bin\obj\TubesStima2.exe
+C:\Users\ASUS\Documents\Wesly G\ITB\Akademik\IF2211 Strategi Algoritma\Tugas Besar 2\Tubes_Stima_2\bin\obj\TubesStima2.pdb
+C:\Users\ASUS\Documents\Wesly G\ITB\Akademik\IF2211 Strategi Algoritma\Tugas Besar 2\Tubes_Stima_2\bin\TubesStima2.exe
+C:\Users\ASUS\Documents\Wesly G\ITB\Akademik\IF2211 Strategi Algoritma\Tugas Besar 2\Tubes_Stima_2\bin\TubesStima2.pdb
