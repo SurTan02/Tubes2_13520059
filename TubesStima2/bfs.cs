@@ -13,13 +13,9 @@ namespace TubesStima2
         {
             Solution = new List<string>();
         }
-        public String[] SplitPath(string path)
-        {
-            String[] pathSeparators = { "\\" };
-            return path.Split(pathSeparators, StringSplitOptions.RemoveEmptyEntries);
-        }
+        
 
-        public void BFS(string root, string searchValue, bool allOccurence, DrawingTree t)
+        public void BFS(string root, string searchValue, bool allOccurrence, DrawingTree t)
         {
             Boolean found = false;
             Queue<string> dirQueue = new Queue<string>();
@@ -56,7 +52,7 @@ namespace TubesStima2
                 foreach (string fi in files)
                 {
                     string fname = Path.GetFileName(fi);
-                    if (found && !allOccurence)
+                    if (found && !allOccurrence)
                     {
                         t.AddChild(currentNodeDir, fname, Color.Black);
                     }
@@ -75,11 +71,11 @@ namespace TubesStima2
                     }
                 }
                 
-                if (found && !allOccurence)
+                if (found && !allOccurrence)
                 {
                     foreach (string dir in subDirs)
                     {
-                        string dname = SplitPath(dir)[SplitPath(dir).Length - 1];
+                        string dname = Path.GetFileName(dir);
                         t.AddChild(currentNodeDir, dname, Color.Black);      
                     }
                 }
@@ -87,7 +83,7 @@ namespace TubesStima2
                 {
                     foreach (string dir in subDirs)
                     {
-                        string dname = SplitPath(dir)[SplitPath(dir).Length - 1];
+                        string dname = Path.GetFileName(dir);
                         string childId = t.AddChild(currentNodeDir, dname, Color.Black);
                         nodeDirQueue.Enqueue((childId, currentLevel+1));
                         dirQueue.Enqueue(dir);

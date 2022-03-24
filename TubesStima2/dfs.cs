@@ -15,18 +15,11 @@ namespace TubesStima2
             Solution = new List<string>();
         }
         
-        // Fungsi untuk menghasilkan string independen dari direktori
-        // C:\Tes >> {C,TES}
-        private String[] SplitPath(string path)
-        {
-            String[] pathSeparators = { "\\" };
-            return path.Split(pathSeparators, StringSplitOptions.RemoveEmptyEntries);
-        }
-
-        public Boolean DFS(string root, string searchValue, bool allOccurance, DrawingTree t, Boolean found) {
+        public Boolean DFS(string root, string searchValue, bool allOccurrence, DrawingTree t, Boolean found) {
             string[] files;
             string[] subDirs;
-            string lastName;
+            string subDirName, fileName;
+            int idx;
             
             // Memeriksa file didalam folder "root"
             try {
@@ -43,18 +36,18 @@ namespace TubesStima2
                 t.SetColor(Color.Red);
             }
 
-            int idx = 0;
+            idx = 0;
             foreach (string fi in files) {
                 idx++;
-                if (Path.GetFileName(fi) == searchValue) {
+                fileName = Path.GetFileName(fi);
+                if (fileName == searchValue) {
 
                     Solution.Add(fi);
-                    lastName = SplitPath(fi)[SplitPath(fi).Length - 1];
-                    t.AddChild(lastName, Color.Green);
+                    t.AddChild(fileName, Color.Green);
                     found = true;
 
-                    // Jika all Occurance tidak di cek
-                    if (!allOccurance) {
+                    // Jika allOccurrence tidak di cek
+                    if (!allOccurrence) {
                         for (int i = idx; i < files.Length; i++) {
                             t.AddChild(Path.GetFileName(files[i]), Color.Black);
                         }
@@ -63,16 +56,16 @@ namespace TubesStima2
                     }
                 }
                 else {
-                    t.AddChild(Path.GetFileName(fi), Color.Red);
+                    t.AddChild(fileName, Color.Red);
                 }
             }
 
             foreach (string dirInfo in subDirs) {
-                lastName = SplitPath(dirInfo)[SplitPath(dirInfo).Length - 1];
-                DrawingTree t1 = new DrawingTree(lastName, Color.Black);
-                // Jika Sudah ditemukan (Kasus non allOccurance)maka subfolder tidak akan dicek
-                if (!found || allOccurance) {
-                    found = DFS(dirInfo, searchValue, allOccurance, t1, found);
+                subDirName = Path.GetFileName(dirInfo);
+                DrawingTree t1 = new DrawingTree(subDirName, Color.Black);
+                // Jika Sudah ditemukan (Kasus non allOccurrence)maka subfolder tidak akan dicek
+                if (!found || allOccurrence) {
+                    found = DFS(dirInfo, searchValue, allOccurrence, t1, found);
                 }
 
                 t.AddChild(t1);
