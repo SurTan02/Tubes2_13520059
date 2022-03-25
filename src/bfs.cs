@@ -44,7 +44,7 @@ namespace TubesStima2
                 }
                 
                 // Kasus jika folder kosong, update menjadi warna merah
-                if (files.Length == 0)
+                if (files.Length == 0 && subDirs.Length == 0)
                 { 
                     t.SetColor(currentNodeDir, Color.Red);
                 }
