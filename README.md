@@ -44,7 +44,7 @@ msbuild src/TubesStima2.csproj /p:OutputPath=../bin /p:IntermediateOutputPath=..
     
 <tr><td>No.</td><td>Nama</td><td>NIM</td></tr>
 <tr><td>1.</td><td><a href="https://github.com/SurTan02"><b>Suryanto</b></a></td><td>13520059</td></tr>
-<tr><td>2.</td><td><a href="https://github.com/weslygio"><b>Wesly Giovano</b></a></td><td>13520092</td></tr>
-<tr><td>3.</td><td><a href="https://github.com/dawetmaster"><b>Andika Naufal Hilmy</td><td>13520113</td></tr>
+<tr><td>2.</td><td><a href="https://github.com/weslygio"><b>Wesly Giovano</b></a></td><td>13520071</td></tr>
+<tr><td>3.</td><td><a href="https://github.com/dawetmaster"><b>Andika Naufal Hilmy</td><td>13520098</td></tr>
 
 </table>
